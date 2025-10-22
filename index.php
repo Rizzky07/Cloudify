@@ -1,15 +1,14 @@
 <?php
 session_start();
 
-// Hitung total item di keranjang dari session 'cart'
-$total_keranjang = 0;
-if (!empty($_SESSION['cart']) && is_array($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $item) {
-        if (isset($item['quantity'])) {
-            $total_keranjang += $item['quantity'];
-        }
-    }
+// --- AWAL KODE MODIFIKASI UNTUK MEMAKSA LOGIN ---
+// Periksa apakah pengguna sudah login
+if (!isset($_SESSION['id_pengguna'])) {
+    // Jika belum login, arahkan ke halaman login
+    header('Location: Model/login.php');
+    exit(); // Penting: Hentikan eksekusi skrip setelah pengalihan
 }
+// --- AKHIR KODE MODIFIKASI UNTUK MEMAKSA LOGIN ---
 ?>
 
 <!DOCTYPE html>
@@ -17,71 +16,71 @@ if (!empty($_SESSION['cart']) && is_array($_SESSION['cart'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gramedia Clone</title>
+  <title>Cloudify</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <div class="header-top-links">
-    <ul>
-      <li><a href="index.php?module=produk&pages=promo">Promo</a></li>
-      <li><a href="index.php?module=produk&pages=toko1">Toko Kami</a></li>
-      <li><a href="index.php?module=produk&pages=hubungi">Hubungi Kami</a></li>
-    </ul>
-  </div>
-
-  <div class="container">
-    <div class="top-nav">
-      <div class="logo">
-        <a href="index.php">Gramedia.com</a>
-      </div>
-
-      <div class="search-bar">
-        <select><option>Kategori</option></select>
-        <div class="input-wrapper">
-          <img src="img/search-interface-symbol.png" alt="search">
-          <input type="text" placeholder="Cari Produk, Judul Buku, atau Penulis">
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="logo-section">
+            <img src="Gambar/Logo Cloudify.png" alt="Cloudify Logo" class="logo-icon">
+            <span class="logo-text">CLOUDIFY</span>
         </div>
 
-        <?php if (isset($_SESSION['id_pengguna'])): ?>
-          <a href="index.php?module=produk&pages=keranjang" class="cart-link" style="position: relative;">
-            <img src="img/shopping-cart.png" alt="keranjang">
-            <?php if ($total_keranjang > 0): ?>
-              <span style="
-                position: absolute;
-                top: -5px;
-                right: -10px;
-                background-color: red;
-                color: white;
-                font-size: 12px;
-                padding: 2px 6px;
-                border-radius: 50%;
-              ">
-                <?= $total_keranjang ?>
-              </span>
-            <?php endif; ?>
-          </a>
-        <?php else: ?>
-          <a href="admin/login.php" class="cart-link">
-            <img src="img/shopping-cart.png" alt="keranjang">
-          </a>
-        <?php endif; ?>
-      </div>
+        <button class="new-button">
+            <i class="fas fa-plus"></i>
+            <span>Baru</span>
+        </button>
 
-      <div class="auth-buttons">
-        <?php if (isset($_SESSION['id_pengguna'])): ?>
-          <span>Halo, <?= htmlspecialchars($_SESSION['nama_pengguna'] ?? 'Pengguna'); ?> | 
-            <a href="admin/logout.php">Logout</a>
-          </span>
-        <?php else: ?>
-          <a href="admin/login.php"><button class="btn-login">Masuk</button></a>
-          <a href="admin/daftar.php"><button class="btn-register">Daftar</button></a>
-        <?php endif; ?>
-      </div>
-    </div>
-  </div>
-</header>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Beranda</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-folder"></i>
+                    <span>Cloud Saya</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>Terbaru</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Favorit</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Sampah</span>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="storage-section">
+            <i class="fas fa-cloud"></i>
+            <span>Penyimpanan</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 31.66%;"></div> </div>
+            <p class="storage-info">1.9 GB dari 6 GB Terpakai</p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="main-header">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <h2 class="welcome-text">Selamat Datang</h2>
+        <div class="content-cards">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+    </main>
+</div>
 
 <div class="container-fluid">
   <?php

@@ -1,0 +1,232 @@
+/* Pengaturan dasar dan reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f6f8; /* Warna latar belakang body */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Container utama untuk tata letak sidebar dan konten */
+.app-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px; /* Batasan lebar agar tidak terlalu lebar di layar besar */
+  border: 2px solid #ddd; /* Garis batas luar pada gambar */
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+}
+
+/* ------------------- */
+/* Gaya Sidebar */
+/* ------------------- */
+.sidebar {
+  width: 250px; /* Lebar sidebar */
+  padding: 20px 15px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Bagian Logo */
+.logo-section {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  margin-bottom: 10px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  /* Ini hanya placeholder, ganti dengan gambar logo asli */
+  border-radius: 50%;
+  background-color: #007bff;
+  display: none; /* Sembunyikan jika menggunakan logo SVG/CSS */
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1a73e8; /* Biru khas logo cloud */
+  /* Meniru logo di gambar (bisa diganti dengan gambar SVG/teks yang di-style) */
+  background-image: url("https://user-images.githubusercontent.com/4952952/100465227-2c1a8a00-30b6-11eb-9f20-b47c0b0a887b.png"); /* Placeholder URL */
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: -9999px; /* Sembunyikan teks jika menggunakan gambar */
+  width: 150px;
+  height: 40px;
+}
+
+/* Tombol "Baru" */
+.new-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px; /* Bentuk kapsul */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  max-width: 150px;
+  margin-left: 5px; /* Sedikit geser ke kanan seperti di gambar */
+}
+
+.new-button i {
+  font-size: 18px;
+}
+
+.new-button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Navigasi Sidebar */
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 8px;
+  color: #3c4043; /* Warna teks non-aktif */
+  transition: background-color 0.2s;
+}
+
+.nav-item i {
+  margin-right: 15px;
+  font-size: 18px;
+  width: 20px; /* Pastikan semua ikon memiliki lebar yang sama */
+  text-align: center;
+}
+
+.nav-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Item aktif/terpilih */
+.nav-item.active {
+  background-color: #e6f0ff; /* Biru muda */
+  color: #1a73e8; /* Biru tua */
+  font-weight: 600;
+}
+
+.nav-item.active i {
+  color: #1a73e8; /* Pastikan ikon juga berwarna biru */
+}
+
+/* Bagian Penyimpanan */
+.storage-section {
+  margin-top: auto; /* Dorong ke bagian bawah */
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 15px;
+}
+
+.storage-section i {
+  font-size: 18px;
+  color: #3c4043;
+  margin-right: 10px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background-color: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #1a73e8; /* Biru untuk progres */
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+
+.storage-info {
+  font-size: 12px;
+  color: #5f6368;
+}
+
+/* ------------------- */
+/* Gaya Konten Utama */
+/* ------------------- */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto; /* Mengizinkan scroll jika kontennya banyak */
+}
+
+.main-header {
+  display: flex;
+  justify-content: flex-end; /* Posisikan search-container di kanan */
+  margin-bottom: 20px;
+}
+
+.search-container {
+  width: 50px; /* Ukuran tombol search */
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border-radius: 50%; /* Bentuk bulat */
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-container i {
+  font-size: 20px;
+  color: #5f6368;
+}
+
+.welcome-text {
+  font-size: 28px;
+  font-weight: normal;
+  color: #3c4043;
+  margin-bottom: 30px;
+}
+
+/* Placeholder untuk konten kartu */
+.content-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  height: 300px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
